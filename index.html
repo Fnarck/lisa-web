@@ -431,9 +431,79 @@
     }
 
     /* ══════════════════════════════════════════════════
+       FORMULAIRE DE CONTACT
+    ══════════════════════════════════════════════════ */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+      margin-bottom: .75rem;
+    }
+    .form-group label {
+      font-size: .8rem;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: .03em;
+      text-transform: uppercase;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: .65rem .875rem;
+      border: 1px solid var(--border);
+      border-radius: calc(var(--radius) * .6);
+      background: var(--bg);
+      color: var(--text);
+      font-family: inherit;
+      font-size: .9rem;
+      transition: border-color .2s, box-shadow .2s;
+      box-sizing: border-box;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-bg);
+    }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    .btn-submit {
+      margin-top: .5rem;
+      padding: .75rem 2rem;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-family: inherit;
+      font-size: .95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background .2s, transform .1s;
+    }
+    .btn-submit:hover { background: var(--accent-h); }
+    .btn-submit:active { transform: scale(.98); }
+    .btn-submit:disabled { opacity: .6; cursor: not-allowed; }
+
+    .form-status {
+      font-size: .9rem;
+      padding: .5rem 0;
+      min-height: 1.5rem;
+    }
+    .form-status.success { color: var(--accent); }
+    .form-status.error   { color: #b91c1c; }
+
+    /* ══════════════════════════════════════════════════
        FOOTER
     ══════════════════════════════════════════════════ */
     footer {
+
       text-align: center;
       padding: 2.5rem 1.5rem;
       font-size: .8rem;
@@ -502,6 +572,7 @@
           <li><a href="#public">Public</a></li>
           <li><a href="#professionnels">Professionnels de santé</a></li>
           <li><a href="#localisation">Localisation</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
 
         <!-- Switcher de thème -->
@@ -629,6 +700,47 @@
       </p>
     </section>
 
+    <!-- Contact -->
+    <section id="contact" class="card">
+      <h3>Prendre contact</h3>
+      <p>
+        Pour toute demande de renseignement ou de rendez-vous, vous pouvez me laisser vos coordonnées
+        via ce formulaire. Je vous recontacte dans les meilleurs délais.
+      </p>
+      <form
+        id="contact-form"
+        action="https://formspree.io/f/FORMSPREE_ID"
+        method="POST"
+      >
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstname">Prénom *</label>
+            <input type="text" id="firstname" name="firstname" required placeholder="Votre prénom" />
+          </div>
+          <div class="form-group">
+            <label for="lastname">Nom *</label>
+            <input type="text" id="lastname" name="lastname" required placeholder="Votre nom" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" required placeholder="votre@email.fr" />
+          </div>
+          <div class="form-group">
+            <label for="phone">Téléphone</label>
+            <input type="tel" id="phone" name="phone" placeholder="06 XX XX XX XX" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="message">Message (optionnel)</label>
+          <textarea id="message" name="message" rows="4" placeholder="Précisez votre demande si vous le souhaitez…"></textarea>
+        </div>
+        <div id="form-status" class="form-status" aria-live="polite"></div>
+        <button type="submit" class="btn-submit">Envoyer ma demande</button>
+      </form>
+    </section>
+
   </main>
 
   <!-- ── Footer ───────────────────────────────────────── -->
@@ -671,6 +783,42 @@
         toggle.setAttribute('aria-expanded', 'false');
       });
     });
+
+    // ── Formspree AJAX ────────────────────────────────
+    const form   = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = form.querySelector('.btn-submit');
+        btn.disabled = true;
+        btn.textContent = 'Envoi en cours…';
+        status.className = 'form-status';
+        status.textContent = '';
+
+        try {
+          const res = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+          });
+          if (res.ok) {
+            status.className = 'form-status success';
+            status.textContent = '✓ Message envoyé — Lisa vous répondra dans les meilleurs délais.';
+            form.reset();
+          } else {
+            throw new Error();
+          }
+        } catch {
+          status.className = 'form-status error';
+          status.textContent = 'Une erreur est survenue. Merci de réessayer ou de nous contacter par téléphone.';
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'Envoyer ma demande';
+        }
+      });
+    }
   </script>
 
 </body>

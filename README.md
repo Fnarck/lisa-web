@@ -5,6 +5,38 @@ praticienne en relaxation thérapeutique selon la méthode Bergès.
 
 ---
 
+## 🔜 Next Steps (en attente)
+
+### 1. Formulaire de contact — Formspree ⏳
+**Bloqué sur** : réception de l'adresse email professionnelle de Lisa.
+
+Une fois l'email dispo :
+1. Créer un compte sur [formspree.io](https://formspree.io)
+2. Créer un nouveau form → copier l'ID (ex: `xwkgabcd`)
+3. Dans `index.html`, rechercher `FORMSPREE_ID` et remplacer par l'ID réel
+4. Déployer : `npx vercel --prod --yes`
+
+Le formulaire collecte : Prénom/Nom · Téléphone · Email · Message  
+→ L'email de Lisa n'apparaît jamais dans le code source.
+
+### 2. Infos de contact à intégrer
+Dans le bloc **Schema.org JSON-LD** (`index.html`, lignes ~30-55) :
+- `"telephone": ""` → à compléter
+- `"email": ""` → à compléter (si Lisa accepte de l'exposer)
+
+### 3. Photo professionnelle (optionnel)
+Section `#parcours` — prévoir un `<img>` avec photo de Lisa si elle en dispose.
+
+### 4. Thème par défaut
+Valider avec Lisa son thème préféré parmi Blanc / Sauge / Lin  
+→ Modifier `data-theme="blanc"` sur la balise `<html>` (ligne 2).
+
+### 5. Domaine secondaire court (optionnel)
+`lisaguillaud.com` reste disponible pour un usage oral / carte de visite.  
+Peut pointer vers le même site Vercel en alias.
+
+---
+
 ## 🌐 Accès
 
 | Environnement | URL |
