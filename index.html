@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="blanc">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Relaxation thérapeutique Bergès – Cabinet libéral – Saint-Jean-de-Moirans</title>
+  <meta name="description" content="Cabinet libéral de relaxation thérapeutique selon la méthode Bergès. Approche psychocorporelle, secteur Voiron – Grenoble (Isère)." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ══════════════════════════════════════════════════
+       TOKENS — 3 THÈMES
+    ══════════════════════════════════════════════════ */
+
+    /* ── Blanc (défaut) ─────────────────────────────── */
+    [data-theme="blanc"] {
+      --bg:           #f7f8f8;
+      --card:         #ffffff;
+      --border:       #e5e7eb;
+      --accent:       #0d766e;
+      --accent-h:     #0a5c55;
+      --accent-bg:    #f0faf9;
+      --accent-brd:   #cceae7;
+      --text:         #1f2937;
+      --muted:        #6b7280;
+      --strong:       #111827;
+      --shadow-sm:    0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04);
+      --shadow-md:    0 6px 20px rgba(0,0,0,.08);
+      --nav-blur:     rgba(255,255,255,.92);
+      --radius:       1rem;
+      --callout-style: italic;
+      --h-family:     'Inter', system-ui, sans-serif;
+      --body-family:  'Inter', system-ui, sans-serif;
+      --hero-pad-top: 5rem;
+      --hero-pad-bot: 4rem;
+      --dot-blanc:    #0d766e;
+      --dot-sauge:    #6b8f6e;
+      --dot-lin:      #9b7e72;
+    }
+
+    /* ── Sauge ──────────────────────────────────────── */
+    [data-theme="sauge"] {
+      --bg:           #f3f0e8;
+      --card:         #faf9f4;
+      --border:       #ddd8cc;
+      --accent:       #5b7a5e;
+      --accent-h:     #445d47;
+      --accent-bg:    #eef3ee;
+      --accent-brd:   #c4d4c5;
+      --text:         #2d3028;
+      --muted:        #6b6e5f;
+      --strong:       #1e2119;
+      --shadow-sm:    0 1px 4px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.03);
+      --shadow-md:    0 8px 24px rgba(0,0,0,.08);
+      --nav-blur:     rgba(243,240,232,.93);
+      --radius:       .875rem;
+      --callout-style: italic;
+      --h-family:     'Inter', system-ui, sans-serif;
+      --body-family:  'Inter', system-ui, sans-serif;
+      --hero-pad-top: 5.5rem;
+      --hero-pad-bot: 4.5rem;
+      --dot-blanc:    #0d766e;
+      --dot-sauge:    #6b8f6e;
+      --dot-lin:      #9b7e72;
+    }
+
+    /* ── Lin ────────────────────────────────────────── */
+    [data-theme="lin"] {
+      --bg:           #eeebe4;
+      --card:         #f9f7f3;
+      --border:       #ddd5c8;
+      --accent:       #8b6f5e;
+      --accent-h:     #6e5548;
+      --accent-bg:    #f5ede9;
+      --accent-brd:   #d9bfb7;
+      --text:         #302820;
+      --muted:        #7a6458;
+      --strong:       #201810;
+      --shadow-sm:    0 1px 4px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.03);
+      --shadow-md:    0 8px 24px rgba(0,0,0,.09);
+      --nav-blur:     rgba(238,235,228,.93);
+      --radius:       .75rem;
+      --callout-style: italic;
+      --h-family:     'Inter', system-ui, sans-serif;
+      --body-family:  'Inter', system-ui, sans-serif;
+      --hero-pad-top: 5rem;
+      --hero-pad-bot: 4rem;
+      --dot-blanc:    #0d766e;
+      --dot-sauge:    #6b8f6e;
+      --dot-lin:      #9b7e72;
+    }
+
+    /* ══════════════════════════════════════════════════
+       RESET & BASE
+    ══════════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--body-family);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      transition: background .35s, color .35s;
+    }
+
+    strong { color: var(--strong); font-weight: 500; }
+
+    /* ══════════════════════════════════════════════════
+       NAVIGATION
+    ══════════════════════════════════════════════════ */
+    :root { --nav-h: 64px; }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--nav-blur);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      height: var(--nav-h);
+      transition: background .35s, border-color .35s;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .nav-brand {
+      font-family: var(--h-family);
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--text);
+      white-space: nowrap;
+      letter-spacing: -.01em;
+      transition: color .35s;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: .82rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+      font-weight: 400;
+      letter-spacing: .01em;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── Switcher ───────────────────────────────────── */
+    .theme-switcher {
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+    }
+
+    .theme-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: transform .2s, border-color .2s;
+    }
+
+    .theme-dot:hover { transform: scale(1.25); }
+
+    .theme-dot[data-t="blanc"] { background: #0d766e; }
+    .theme-dot[data-t="sauge"] { background: #6b8f6e; }
+    .theme-dot[data-t="lin"]   { background: #9b7e72; }
+
+    [data-theme="blanc"] .theme-dot[data-t="blanc"],
+    [data-theme="sauge"] .theme-dot[data-t="sauge"],
+    [data-theme="lin"]   .theme-dot[data-t="lin"] {
+      border-color: var(--text);
+      transform: scale(1.2);
+    }
+
+    /* ── Mobile ─────────────────────────────────────── */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: .25rem;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: transform .25s, opacity .25s;
+    }
+
+    /* ══════════════════════════════════════════════════
+       HERO
+    ══════════════════════════════════════════════════ */
+    header {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: var(--hero-pad-top) 1.5rem var(--hero-pad-bot);
+      text-align: center;
+      transition: background .35s, border-color .35s;
+    }
+
+    /* ── Sauge hero : ligne déco ────────────────────── */
+    [data-theme="sauge"] header::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
+      margin: 1.25rem auto 0;
+      opacity: .5;
+    }
+
+    header h1 {
+      font-family: var(--h-family);
+      font-size: clamp(1.75rem, 3.5vw, 2.4rem);
+      font-weight: 600;
+      letter-spacing: -.02em;
+      color: var(--text);
+      margin-bottom: .5rem;
+      line-height: 1.2;
+      transition: color .35s;
+    }
+
+    header h2 {
+      font-size: .975rem;
+      font-weight: 400;
+      color: var(--accent);
+      margin-bottom: .5rem;
+      letter-spacing: .02em;
+      transition: color .35s;
+    }
+
+    [data-theme="sauge"] header h2 {
+      font-size: 1.15rem;
+    }
+
+    header p {
+      font-size: .84rem;
+      color: var(--muted);
+      letter-spacing: .01em;
+      transition: color .35s;
+    }
+
+    /* ══════════════════════════════════════════════════
+       MAIN
+    ══════════════════════════════════════════════════ */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    /* ══════════════════════════════════════════════════
+       CARDS
+    ══════════════════════════════════════════════════ */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-sm);
+      scroll-margin-top: calc(var(--nav-h) + 1.25rem);
+      transition: background .35s, border-color .35s, box-shadow .25s;
+    }
+
+    .card:hover { box-shadow: var(--shadow-md); }
+
+    /* Sauge : léger fond légèrement plus chaud sur hover */
+    [data-theme="sauge"] .card:hover { border-color: var(--accent-brd); }
+    [data-theme="lin"]   .card:hover { border-color: var(--accent-brd); }
+
+    .card h3 {
+      font-family: var(--h-family);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+      letter-spacing: -.01em;
+      line-height: 1.3;
+      transition: color .35s;
+    }
+
+    [data-theme="sauge"] .card h3 { font-size: 1.15rem; font-weight: 600; }
+
+    .card p {
+      color: var(--muted);
+      margin-bottom: .9rem;
+      font-size: .9375rem;
+      transition: color .35s;
+    }
+
+    [data-theme="sauge"] .card p { font-size: 1.05rem; line-height: 1.8; }
+
+    .card p:last-of-type { margin-bottom: 0; }
+
+    /* ── Callout ────────────────────────────────────── */
+    .callout {
+      border-left: 3px solid var(--accent);
+      background: var(--accent-bg);
+      border-radius: 0 .5rem .5rem 0;
+      padding: 1rem 1.25rem;
+      color: var(--text);
+      font-size: .9rem;
+      margin-top: 1.25rem;
+      font-style: var(--callout-style);
+      transition: background .35s, border-color .35s, color .35s;
+    }
+
+    [data-theme="sauge"] .callout { font-size: 1rem; line-height: 1.8; }
+
+    /* ── Liste ──────────────────────────────────────── */
+    .card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .card ul li {
+      color: var(--muted);
+      font-size: .9375rem;
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+      transition: color .35s;
+    }
+
+    [data-theme="sauge"] .card ul li { font-size: 1.05rem; }
+
+    .card ul li::before {
+      content: '';
+      display: block;
+      width: 5px;
+      height: 5px;
+      min-width: 5px;
+      background: var(--accent);
+      border-radius: 50%;
+      margin-top: .65rem;
+      transition: background .35s;
+    }
+
+    /* Lin : losange à la place du rond */
+    [data-theme="lin"] .card ul li::before {
+      border-radius: 1px;
+      transform: rotate(45deg);
+      width: 6px;
+      height: 6px;
+    }
+
+    /* ══════════════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════════════ */
+    footer {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      font-size: .8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: .25rem;
+      transition: border-color .35s, color .35s;
+    }
+
+    [data-theme="sauge"] footer { font-size: .875rem; }
+
+    /* ══════════════════════════════════════════════════
+       ANIMATION D'ENTRÉE
+    ══════════════════════════════════════════════════ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      opacity: 0;
+      animation: fadeUp .55s ease forwards;
+    }
+    .card:nth-child(1) { animation-delay: .04s; }
+    .card:nth-child(2) { animation-delay: .11s; }
+    .card:nth-child(3) { animation-delay: .18s; }
+    .card:nth-child(4) { animation-delay: .25s; }
+    .card:nth-child(5) { animation-delay: .32s; }
+
+    /* ══════════════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════════════ */
+    @media (max-width: 720px) {
+      .nav-links { display: none; flex-direction: column; gap: 0; }
+      .nav-links.open {
+        display: flex;
+        position: absolute;
+        top: var(--nav-h);
+        left: 0; right: 0;
+        background: var(--nav-blur);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 1.5rem;
+        gap: .875rem;
+      }
+      .nav-toggle { display: flex; }
+      .nav-right { gap: 1rem; }
+      .card { padding: 1.75rem 1.25rem; }
+      header { padding: 3rem 1.25rem 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ───────────────────────────────────── -->
+  <nav>
+    <div class="nav-inner">
+      <span class="nav-brand">Relaxation thérapeutique Bergès</span>
+
+      <div class="nav-right">
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#accueil">Accueil</a></li>
+          <li><a href="#pratique">La pratique</a></li>
+          <li><a href="#public">Public</a></li>
+          <li><a href="#professionnels">Professionnels de santé</a></li>
+          <li><a href="#localisation">Localisation</a></li>
+        </ul>
+
+        <!-- Switcher de thème -->
+        <div class="theme-switcher" aria-label="Choisir une variante visuelle" title="Variantes visuelles">
+          <button class="theme-dot" data-t="blanc" title="Thème Blanc" aria-label="Thème Blanc"></button>
+          <button class="theme-dot" data-t="sauge" title="Thème Sauge" aria-label="Thème Sauge"></button>
+          <button class="theme-dot" data-t="lin"   title="Thème Lin"   aria-label="Thème Lin"></button>
+        </div>
+
+        <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Hero ─────────────────────────────────────────── -->
+  <header id="accueil">
+    <h1>Relaxation thérapeutique Bergès</h1>
+    <h2>Approche psychocorporelle &ndash; Cabinet libéral</h2>
+    <p>Saint-Jean-de-Moirans &middot; Secteur Voiron &ndash; Grenoble (25&nbsp;km)</p>
+  </header>
+
+  <!-- ── Content ──────────────────────────────────────── -->
+  <main>
+
+    <!-- Parcours -->
+    <section id="parcours" class="card">
+      <h3>Parcours professionnel</h3>
+      <p>
+        <strong>Psychomotricienne diplômée d'État</strong> (1985, école ISRP/ISRB Paris),
+        j'ai exercé pendant près de quarante ans au sein de la fonction publique hospitalière
+        et du secteur médico-social.
+      </p>
+      <p>
+        Mon parcours m'a conduite à accompagner des <strong>enfants, adolescents et adultes</strong>
+        dans des contextes cliniques variés&nbsp;: IME, foyers pour adultes,
+        unité de psychologie médicale infantile au CHU de Grenoble,
+        Centre Médico-Psychologique et hôpital de jour pour enfants et adolescents,
+        au Centre hospitalier de Saint-Laurent-du-Pont, ainsi qu'au Centre Hospitalier Alpes Isère.
+      </p>
+      <p>
+        J'ai également développé une pratique spécifique en <strong>périnatalité</strong>
+        au Centre d'Accueil Thérapeutique à Temps Partiel ASSTRIADE Nord à Moirans.
+      </p>
+      <p>
+        Formée de manière approfondie à la <strong>relaxation thérapeutique</strong>
+        (Institut de relaxation thérapeutique de Paris, 1997–2015),
+        je me suis spécialisée en <strong>relaxation thérapeutique selon la méthode Bergès</strong>
+        en 2018, que j'ai utilisée auprès d'enfants, d'adolescents et d'adultes.
+        Retraitée de la fonction publique hospitalière depuis juillet 2024,
+        j'exerce aujourd'hui en <strong>cabinet libéral</strong>.
+      </p>
+    </section>
+
+    <!-- Pratique -->
+    <section id="pratique" class="card">
+      <h3>Une approche de soin psychocorporel</h3>
+      <p>
+        Je propose des séances de <strong>relaxation thérapeutique selon la méthode Bergès</strong>,
+        une pratique de soin inscrite dans une approche thérapeutique psychocorporelle.
+      </p>
+      <p>
+        Cette méthode utilise le corps comme médiateur afin de soutenir les processus psychiques,
+        dans un cadre thérapeutique structuré et sécurisé.
+      </p>
+      <p>
+        Chaque accompagnement débute par un entretien préalable permettant d'évaluer la demande,
+        de vérifier l'indication et de poser un cadre thérapeutique adapté.
+      </p>
+      <p>
+        Les séances se déroulent en cabinet libéral, dans le respect d'un cadre professionnel strict,
+        fondé sur des règles éthiques et déontologiques.
+      </p>
+      <div class="callout">
+        Il ne s'agit pas d'une pratique de bien-être ni de relaxation de confort,
+        mais d'un dispositif thérapeutique relevant du champ du soin.
+      </div>
+    </section>
+
+    <!-- Public -->
+    <section id="public" class="card">
+      <h3>Public concerné</h3>
+      <ul>
+        <li><strong>Enfants</strong>&nbsp;: lorsque le corps constitue un appui essentiel dans l'élaboration psychique</li>
+        <li><strong>Adolescents</strong>&nbsp;: difficultés de régulation corporelle, émotionnelle ou relationnelle</li>
+        <li><strong>Adultes</strong>&nbsp;: démarche de soin intégrant la dimension corporelle</li>
+      </ul>
+    </section>
+
+    <!-- Professionnels -->
+    <section id="professionnels" class="card">
+      <h3>Pour les professionnels de santé</h3>
+      <p>
+        La relaxation thérapeutique Bergès est une <strong>médiation corporelle à visée thérapeutique</strong>,
+        proposée auprès des enfants, adolescents et adultes en cabinet libéral.
+      </p>
+      <p>
+        Elle s'appuie sur le travail du schéma corporel, de la régulation tonico-émotionnelle
+        et de l'investissement subjectif du corps, lorsque la médiation corporelle constitue
+        un levier clinique pertinent.
+      </p>
+      <p>
+        Cette pratique peut s'inscrire de manière autonome ou en articulation avec
+        un suivi médical, psychologique ou psychiatrique, dans une logique de continuité des soins.
+      </p>
+    </section>
+
+    <!-- Localisation -->
+    <section id="localisation" class="card">
+      <h3>Localisation du cabinet</h3>
+      <p>
+        Le cabinet de <strong>relaxation thérapeutique Bergès</strong> est situé à
+        <strong>Saint-Jean-de-Moirans</strong>, en Isère.
+      </p>
+      <p>
+        Il se trouve à proximité immédiate de <strong>Moirans</strong>, <strong>Voiron</strong>,
+        <strong>Voreppe</strong>, <strong>La Buisse</strong> et <strong>Saint-Égrève</strong>,
+        et à environ <strong>25&nbsp;km de Grenoble</strong>.
+      </p>
+      <p>
+        Les accompagnements s'adressent à des patients en capacité de se déplacer physiquement
+        au cabinet. La zone d'intervention est volontairement limitée à un secteur géographique
+        restreint (environ 10 à 30&nbsp;km) afin de garantir un cadre de soin adapté et réaliste.
+      </p>
+    </section>
+
+  </main>
+
+  <!-- ── Footer ───────────────────────────────────────── -->
+  <footer>
+    <p>Relaxation thérapeutique Bergès &ndash; Cabinet libéral</p>
+    <p>Pratique relevant exclusivement du champ thérapeutique</p>
+  </footer>
+
+  <!-- ── JS ───────────────────────────────────────────── -->
+  <script>
+    // ── Theme switcher ────────────────────────────────
+    const html = document.documentElement;
+    const STORAGE_KEY = 'rtb-theme';
+
+    function applyTheme(t) {
+      html.setAttribute('data-theme', t);
+      localStorage.setItem(STORAGE_KEY, t);
+    }
+
+    // Restore saved theme
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) applyTheme(saved);
+
+    document.querySelectorAll('.theme-dot').forEach(btn => {
+      btn.addEventListener('click', () => applyTheme(btn.dataset.t));
+    });
+
+    // ── Mobile nav ────────────────────────────────────
+    const toggle = document.getElementById('nav-toggle');
+    const links  = document.getElementById('nav-links');
+
+    toggle.addEventListener('click', () => {
+      const isOpen = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    links.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        links.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+
+</body>
+</html>
